@@ -43,8 +43,8 @@ public:
     void switchToPrevTab() {
         if (current && current->prev) {
             current = current->prev;
-            std::cout << "Switched to previous tab: " << current->name
-                      << " (" << current->url << "), Memory: " << current->memory << "MB" << std::endl;
+            std::cout << current->name << std::endl
+                      << current->url << std::endl << current->memory << "MB" << std::endl;
         } else {
             std::cout << "No previous tab" << std::endl;
         }
@@ -53,8 +53,8 @@ public:
     void switchToNextTab() {
         if (current && current->next) {
             current = current->next;
-            std::cout << "Switched to next tab: " << current->name
-                      << " (" << current->url << "), Memory: " << current->memory << "MB" << std::endl;
+            std::cout << current->name << std::endl
+                      << current->url << std::endl << current->memory << "MB" << std::endl;
         } else {
             std::cout << "No next tab" << std::endl;
         }
@@ -79,7 +79,6 @@ public:
         }
     }
 
-
     void bookmarkCurrent() {
         if (current) {
             for (const auto& bookmark : bookmarks) {
@@ -91,7 +90,6 @@ public:
             bookmarks.push_back({current->name, current->url});
             std::cout << "Bookmarked current tab: " << current->name << std::endl;
         }
-
     }
 
     void showBookmarkTab() {
@@ -108,7 +106,7 @@ public:
             if (temp->prev) temp->prev->next = temp->next;
             if (temp->next) temp->next->prev = temp->prev;
             if (temp == tail) tail = temp->prev;
-            
+
             temp->next = head;
             temp->prev = nullptr;
             if (head) head->prev = temp;
@@ -153,18 +151,17 @@ public:
         if (current == maxMemoryTab) current = maxMemoryTab->next ? maxMemoryTab->next : maxMemoryTab->prev;
     }
 
-//Add display method in Browser template class 
-    void display(){
-            auto curr = head;
-            std::cout<<"Browser tab list = "<<std::endl;
-            while(curr){
-                std::cout<<"| "<<curr->name<<"  x|-->";
-                curr = curr->next;
-            }
-            std::cout<<std::endl;
-            std::cout<<std::endl;
+    void display() {
+        auto curr = head;
+        std::cout << "Browser tab list = " << std::endl;
+        while (curr) {
+            std::cout << "| " << curr->name << "  x|-->";
+            curr = curr->next;
         }
+        std::cout << std::endl << std::endl;
+    }
 };
+
 
 int main(){
     
